@@ -1,0 +1,39 @@
+openapi: "3.0.0"
+info:
+  version: 0.0.1
+  title: Prime Numbers Server
+paths:
+  /primes/loop:
+    get:
+      summary: Brute-force prime numbers
+      description: >
+        Generate as many prime numbers as possible in a given time period.  Uses only the event-loop.
+      operationId: primesEventLoopGET
+      responses:
+        '200':
+          description: A bunch of primes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prime"
+  /primes/threaded:
+    get:
+      summary: Brute-force prime numbers
+      description: >
+        Generate as many prime numbers as possible in a given time period.  Uses a thread-worker pool.
+      operationId: primesThreadedGET
+      responses:
+        '200':
+          description: A bunch of primes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prime"
+components:
+  schemas:
+    Prime:
+      required:
+        - primes
+      properties:
+        primes:
+          type: array
